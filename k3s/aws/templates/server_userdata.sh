@@ -25,12 +25,7 @@ pip install awscli
 sleep 10
 
 echo "Installing cloud controller RBAC"
-curl -o /var/lib/rancher/k3s/server/manifests/aws-rbac.yaml https://raw.githubusercontent.com/kubernetes/cloud-provider-aws/v1.18.0-alpha.1/manifests/rbac.yaml
-
-sleep 10
-
-echo "Installing AWS controller"
-curl -o /var/lib/rancher/k3s/server/manifests/aws-cloud-controller-manager-daemonset.yaml https://raw.githubusercontent.com/kubernetes/cloud-provider-aws/v1.18.0-alpha.1/manifests/aws-cloud-controller-manager-daemonset.yaml
+curl -o /var/lib/rancher/k3s/server/manifests/aws-manifests.yaml https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/aws-driver-manifests/manifests.yaml
 
 echo "Installing Helm and EBS.."
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash

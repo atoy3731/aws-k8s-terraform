@@ -25,6 +25,9 @@ resource "aws_subnet" "k8s_private_subnet_1" {
 
   tags = {
     Name = "K8S Private Subnet 1"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "KubernetesCluster" = var.cluster_name
+    "kubernetes.io/role/internal-elb" = ""
   }
 }
 
@@ -35,6 +38,9 @@ resource "aws_subnet" "k8s_private_subnet_2" {
 
   tags = {
     Name = "K8S Private Subnet 2"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "KubernetesCluster" = var.cluster_name
+    "kubernetes.io/role/internal-elb" = ""
   }
 }
 
@@ -45,6 +51,9 @@ resource "aws_subnet" "k8s_public_subnet_1" {
 
   tags = {
     Name = "K8S Public Subnet 1"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "KubernetesCluster" = var.cluster_name
+    "kubernetes.io/role/elb" = ""
   }
 }
 
@@ -55,6 +64,9 @@ resource "aws_subnet" "k8s_public_subnet_2" {
 
   tags = {
     Name = "K8S Public Subnet 2"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "KubernetesCluster" = var.cluster_name
+    "kubernetes.io/role/elb" = ""
   }
 }
 
