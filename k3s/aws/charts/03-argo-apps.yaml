@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: umbrella
+  namespace: argocd
+spec:
+  project: umbrella
+  source:
+    repoURL: https://github.com/alterus-io/umbrella.git
+    targetRevision: master
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
