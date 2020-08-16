@@ -25,7 +25,11 @@ pip install awscli
 sleep 10
 
 echo "Installing cloud controller RBAC"
-curl -o /var/lib/rancher/k3s/server/manifests/aws-manifests.yaml https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/aws-driver-manifests/manifests.yaml
+curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/aws-cloud-provider-manifests.yaml | kubectl apply -f -
+
+echo "Installing ArgoCD"
+curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/argocd-manifests.yaml | kubectl apply -f -
+
 
 echo "Installing Helm and EBS.."
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash

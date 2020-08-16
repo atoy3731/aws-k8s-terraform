@@ -99,33 +99,6 @@ resource "aws_instance" "bastion" {
 # MASTERS #
 ###########
 
-resource "aws_security_group" "internal_ssh" {
-  name        = "internal-ssh"
-  description = "Allow traffic for K8S Control Plane"
-  vpc_id      = aws_vpc.k8s_vpc.id
-
-  ingress {
-    description = "Ingress Control Plane"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [aws_vpc.k8s_vpc.cidr_block]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "internal-ssh"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-    "KubernetesCluster"                 = var.cluster_name
-  }
-}
-
 resource "aws_security_group" "k8s_cp_sg" {
   name        = "k8s-cp-sg"
   description = "Allow traffic for K8S Control Plane"
@@ -321,7 +294,7 @@ resource "aws_launch_template" "k8s_master_launch_template" {
     enabled = true
   }
 
-  vpc_security_group_ids = [aws_security_group.k8s_cp_sg.id, aws_security_group.internal_ssh.id]
+  vpc_security_group_ids = [aws_security_group.k8s_cp_sg.id]
 
   tag_specifications {
     resource_type = "instance"
@@ -500,7 +473,7 @@ resource "aws_launch_template" "k8s_agent_launch_template" {
     enabled = true
   }
 
-  vpc_security_group_ids = [aws_security_group.k8s_agent_sg.id, aws_security_group.internal_ssh.id]
+  vpc_security_group_ids = [aws_security_group.k8s_agent_sg.id]
 
   tag_specifications {
     resource_type = "instance"
