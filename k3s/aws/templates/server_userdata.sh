@@ -23,7 +23,10 @@ echo "Installing AWS CLI"
 snap install jq
 pip install awscli
 
-sleep 25
+echo "Waiting for k3s config file to exist.."
+while [[ ! -f /etc/rancher/k3s/k3s.yaml ]]; do
+  sleep 2
+done
 
 echo "Installing cloud controller RBAC"
 curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/aws-cloud-provider-manifests.yaml | kubectl apply -f -
