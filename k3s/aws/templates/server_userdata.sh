@@ -7,6 +7,7 @@ export INSTALL_K3S_EXEC="server"
 export K3S_DATASTORE_ENDPOINT="${datastore_endpoint}"
 export CONFIGURE_AWS_PROVIDER="${configure_aws_provider}"
 export K3S_TOKEN="${k3s_token}"
+export K3S_NODE_NAME="$(hostname).ec2.internal"
 
 if [[ "$CONFIGURE_AWS_PROVIDER" == "true" ]]; then
     curl -sfL https://get.k3s.io | sh -s - server \
@@ -22,7 +23,7 @@ echo "Installing AWS CLI"
 snap install jq
 pip install awscli
 
-sleep 10
+sleep 25
 
 echo "Installing cloud controller RBAC"
 curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/aws-cloud-provider-manifests.yaml | kubectl apply -f -

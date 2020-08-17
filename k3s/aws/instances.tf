@@ -104,14 +104,6 @@ resource "aws_security_group" "k8s_cp_sg" {
   description = "Allow traffic for K8S Control Plane"
   vpc_id      = aws_vpc.k8s_vpc.id
 
-  ingress {
-    description = "Ingress Control Plane"
-    from_port   = 6443
-    to_port     = 6443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -133,6 +125,16 @@ resource "aws_security_group_rule" "k8s_cp_sg_self_ingress" {
   protocol          = "-1"
   cidr_blocks = [aws_vpc.k8s_vpc.cidr_block]
   security_group_id = aws_security_group.k8s_cp_sg.id
+}
+
+resource "aws_security_group_rule" "k8s_cp_ingress" {
+    description = "Ingress Control Plane"
+    type        = "ingress"
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+   security_group_id = aws_security_group.k8s_cp_sg.id
 }
 
 resource "aws_iam_policy" "k8s_master_iam_policy" {
@@ -314,8 +316,6 @@ resource "aws_launch_template" "k8s_master_launch_template" {
 resource "aws_autoscaling_group" "k8s_master_asg" {
   name                 = "k8s-master-asg"
 
-  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
-
   launch_template {
     id      = aws_launch_template.k8s_master_launch_template.id
     version = "$Latest"
@@ -383,6 +383,15 @@ resource "aws_security_group_rule" "k8s_agent_sg_https_ingress" {
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.k8s_agent_sg.id
+}
+
+resource "aws_security_group_rule" "k8s_agent_sg_self_ingress" {
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks = [aws_vpc.k8s_vpc.cidr_block]
   security_group_id = aws_security_group.k8s_agent_sg.id
 }
 
@@ -491,8 +500,6 @@ resource "aws_launch_template" "k8s_agent_launch_template" {
 
 resource "aws_autoscaling_group" "k8s_agent_asg" {
   name                 = "k8s-agent-asg"
-
-  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
 
   launch_template {
     id      = aws_launch_template.k8s_agent_launch_template.id

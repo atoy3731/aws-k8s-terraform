@@ -2,6 +2,7 @@
 
 export CONFIGURE_AWS_PROVIDER="${configure_aws_provider}"
 export K3S_TOKEN="${k3s_token}"
+export K3S_NODE_NAME="$(hostname).ec2.internal"
 
 if [[ "$CONFIGURE_AWS_PROVIDER" == "true" ]]; then
     curl -sfL https://get.k3s.io | sh -s - agent \
