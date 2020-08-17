@@ -31,18 +31,17 @@ done
 echo "Installing cloud controller RBAC"
 curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/aws-cloud-provider-manifests.yaml | kubectl apply -f -
 
-echo "Installing ArgoCD"
-curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/argocd-manifests.yaml | kubectl apply -f -
+#echo "Installing ArgoCD"
+#curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/argocd-manifests.yaml | kubectl apply -f -
 
-
-echo "Installing Helm and EBS.."
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-helm --kubeconfig /etc/rancher/k3s/k3s.yaml install aws-ebs-csi-driver \
-  --set enableVolumeScheduling=true \
-  --set enableVolumeResizing=true \
-  --set enableVolumeSnapshot=true \
-  --set cloud-provider=external \
-  https://github.com/kubernetes-sigs/aws-ebs-csi-driver/releases/download/v0.5.0/helm-chart.tgz
+#echo "Installing Helm and EBS.."
+#curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+#helm --kubeconfig /etc/rancher/k3s/k3s.yaml install aws-ebs-csi-driver \
+#  --set enableVolumeScheduling=true \
+#  --set enableVolumeResizing=true \
+#  --set enableVolumeSnapshot=true \
+#  --set cloud-provider=external \
+#  https://github.com/kubernetes-sigs/aws-ebs-csi-driver/releases/download/v0.5.0/helm-chart.tgz
 
 
 CURRENT_REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .region)
