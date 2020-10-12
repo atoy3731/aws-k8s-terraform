@@ -9,7 +9,7 @@ module "aws_infrastructure" {
 
   db_password = var.db_password
   db_username = var.db_username
-  keypair_name = var.keypair_name
+  public_ssh_key = var.public_ssh_key
   key_s3_bucket_name = var.key_s3_bucket_name
 
   k3s_server_count = var.k3s_server_count

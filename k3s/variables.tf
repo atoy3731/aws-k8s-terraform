@@ -47,7 +47,7 @@ variable "db_password" {
   type = string
 }
 
-variable "keypair_name" {
+variable "public_ssh_key" {
   type = string
 }
 

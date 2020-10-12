@@ -21,6 +21,17 @@ data "template_file" "agent_userdata" {
   }
 }
 
+###########
+# KEYPAIR #
+###########
+
+module "key_pair" {
+  source = "terraform-aws-modules/key-pair/aws"
+
+  key_name   = "${var.cluster_name}-keypair"
+  public_key = var.public_ssh_key 
+}
+
 #############
 # K3S TOKEN #
 #############
@@ -86,7 +97,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
   associate_public_ip_address = true
 
-  key_name = var.keypair_name
+  key_name = "${var.cluster_name}-keypair"
 
   tags = {
     Name = "k8s-bastion"
@@ -309,7 +320,7 @@ resource "aws_launch_template" "k8s_master_launch_template" {
     }
   }
 
-  key_name = var.keypair_name
+  key_name = "${var.cluster_name}-keypair" 
   user_data = base64encode(data.template_file.server_userdata.rendered)
 }
 
@@ -494,7 +505,7 @@ resource "aws_launch_template" "k8s_agent_launch_template" {
     }
   }
 
-  key_name = var.keypair_name
+  key_name = "${var.cluster_name}-keypair" 
   user_data = base64encode(data.template_file.agent_userdata.rendered)
 }
 
