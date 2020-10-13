@@ -55,4 +55,4 @@ Right now, we only support a K3S deployment model using RDS as a backend store. 
 
 ### What Next?
 
-If you're looking to really get into GitOps via ArgoCD, check out the [demo-app](https://github.com/alterus-io/demo-app) for adding a ton of cool tools to this cluster.
+If you're looking to really get into GitOps via ArgoCD, check out the [demo-app](https://github.com/alterus-io/k8s-tools-app) for adding a ton of cool tools to this cluster.
