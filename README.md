@@ -13,7 +13,10 @@ This is a project containing Terraform IaC to get a scalable Kubernetes cluster 
 
 Right now, we only support a K3S deployment model using RDS as a backend store. Eventually we'll expand to EKS.
 
-1. Navigate to the `k3s` directory: `cd k3s`
+1. Navigate to the `k3s` directory: 
+    ```bash
+    cd k3s
+    ```
 
 2. Update the `example.tfvars`:
    * _db_username_: The master username for the RDS cluster.
@@ -48,7 +51,6 @@ Right now, we only support a K3S deployment model using RDS as a backend store. 
     kubectl get deployments -n kube-system | grep argocd
     ```
     You should see all ArgoCD deployments as `1/1`.
-    
     
 
 ### What Next?
