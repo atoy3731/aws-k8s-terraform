@@ -1,3 +1,12 @@
+terraform {
+  backend "s3" {
+    bucket               = "alterus-k3s-state-bucket"
+    key                  = "states/terraform.tfstate"
+    region               = "us-east-1"
+    dynamodb_table       = ""
+  }
+}
+
 # Configure the AWS Provider
 provider "aws" {
   version = "~> 2.0"
