@@ -67,7 +67,7 @@ Right now, we only support a K3S deployment model using RDS as a backend store. 
 
 ### Destroying your cluster
 
-To destroy a cluster, you need to first go to your AWS console, the EC2 service, and click on Load Balancers.  There will be an ELB that the Kubernetes cloud provider created but isn't managed by Terraform that you need to clean up.    
+To destroy a cluster, you need to first go to your AWS console, the EC2 service, and click on Load Balancers.  There will be an ELB that the Kubernetes cloud provider created but isn't managed by Terraform that you need to clean up. You also need to delete the Security Group that that ELB is using.   
 
 After you've cleaned the ELB up, run the following and type "yes" when prompted:
 ```bash
