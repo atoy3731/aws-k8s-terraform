@@ -5,3 +5,9 @@ public_ssh_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy+u/d4TOYvxWmUMZ/Brx8M3
 
 keypair_name	= "test-keypair"
 key_s3_bucket_name	= "test-bucket-random-34262352"
+
+# Workers (Default: 3)
+# k3s_agent_count = 3
+
+# Servers (Default: 3)
+# k3s_server_count = 3

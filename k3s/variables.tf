@@ -67,7 +67,7 @@ variable "k3s_server_size" {
 
 variable "k3s_agent_count" {
   type = number
-  default = 1
+  default = 3
 }
 
 variable "k3s_agent_size" {
