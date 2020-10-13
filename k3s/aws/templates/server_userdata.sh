@@ -31,8 +31,8 @@ done
 echo "Installing cloud controller RBAC"
 curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/aws-cloud-provider-manifests.yaml | kubectl apply -f -
 
-#echo "Installing ArgoCD"
-#curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/argocd-manifests.yaml | kubectl apply -f -
+echo "Installing ArgoCD"
+curl https://raw.githubusercontent.com/alterus-io/aws-k8s-terraform/master/manifests/argocd-manifests.yaml | kubectl apply -f -
 
 #echo "Installing Helm and EBS.."
 #curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
