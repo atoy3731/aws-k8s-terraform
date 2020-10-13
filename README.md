@@ -64,7 +64,15 @@ Right now, we only support a K3S deployment model using RDS as a backend store. 
     kubectl get deployments -n kube-system | grep argocd
     ```
     You should see all ArgoCD deployments as `1/1`.
-    
+
+### Destroying your cluster
+
+To destroy a cluster, you need to first go to your AWS console, the EC2 service, and click on Load Balancers.  There will be an ELB that the Kubernetes cloud provider created but isn't managed by Terraform that you need to clean up.    
+
+After you've cleaned the ELB up, run the following and type "yes" when prompted:
+```bash
+terraform destroy -var-file=example.tfvars
+```
 
 ### What Next?
 
