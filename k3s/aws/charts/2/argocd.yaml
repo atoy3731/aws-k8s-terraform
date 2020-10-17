@@ -14,4 +14,4 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - argocd.alterus.io
+          - argocd.atoy.dev

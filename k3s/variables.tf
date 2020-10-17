@@ -2,7 +2,7 @@
 
 variable "cluster_name" {
   type = string
-  default = "mgmt-cluster"
+  default = "k8s-cluster"
 }
 
 variable "region" {
