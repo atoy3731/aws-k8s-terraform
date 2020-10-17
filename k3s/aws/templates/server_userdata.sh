@@ -12,11 +12,13 @@ export K3S_NODE_NAME="$(hostname).ec2.internal"
 if [[ "$CONFIGURE_AWS_PROVIDER" == "true" ]]; then
     curl -sfL https://get.k3s.io | sh -s - server \
       --disable-cloud-controller \
+      --tls-san ${cp_lb_host} \
       --no-deploy servicelb \
       --kubelet-arg="cloud-provider=external" \
       --kubelet-arg="provider-id=aws:///$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)/$(curl -s http://169.254.169.254/latest/meta-data/instance-id)"
 else
-    curl -sfL https://get.k3s.io | sh -s -
+    curl -sfL https://get.k3s.io | sh -s - server \
+      --tls-san ${cp_lb_host}
 fi
 
 echo "Installing AWS CLI"

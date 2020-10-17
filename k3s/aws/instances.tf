@@ -332,7 +332,7 @@ resource "aws_autoscaling_group" "k8s_master_asg" {
     version = "$Latest"
   }
 
-  min_size             = 1
+  min_size             = var.k3s_server_count
   max_size             = var.k3s_server_count
   desired_capacity = var.k3s_server_count
 
@@ -517,7 +517,7 @@ resource "aws_autoscaling_group" "k8s_agent_asg" {
     version = "$Latest"
   }
 
-  min_size             = 1
+  min_size             = var.k3s_agent_count
   max_size             = var.k3s_agent_count
   desired_capacity = var.k3s_agent_count
 
