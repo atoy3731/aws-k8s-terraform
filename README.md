@@ -76,4 +76,4 @@ terraform destroy -var-file=example.tfvars
 
 ### What Next?
 
-If you're looking to really get into GitOps via ArgoCD, check out the [demo-app](https://github.com/alterus-io/k8s-tools-app) for adding a ton of cool tools to this cluster.
+If you're looking to really get into GitOps via ArgoCD, check out the [demo-app](https://github.com/atoy3731/k8s-tools-app) for adding a ton of cool tools to this cluster.
